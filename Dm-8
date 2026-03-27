@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int V, E;
+
+    // Input number of vertices and edges
+    cout << "Enter number of vertices: ";
+    cin >> V;
+
+    cout << "Enter number of edges: ";
+    cin >> E;
+
+    vector<vector<int>> adj(V);
+    vector<int> indegree(V, 0), outdegree(V, 0);
+
+    cout << "Enter edges (u v) for directed graph:\n";
+    
+    for (int i = 0; i < E; i++) {
+        int u, v;
+        cin >> u >> v;
+
+        // Add edge u -> v
+        adj[u].push_back(v);
+
+        // Update degrees
+        outdegree[u]++;
+        indegree[v]++;
+    }
+
+    // Display results
+    cout << "\nVertex\tIn-Degree\tOut-Degree\n";
+    for (int i = 0; i < V; i++) {
+        cout << i << "\t" << indegree[i] << "\t\t" << outdegree[i] << endl;
+    }
+
+    return 0;
+}
