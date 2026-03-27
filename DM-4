@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+
+int x[20];  // to store values of x1, x2, ..., xn
+
+void findSolutions(int n, int C, int index, int sum) {
+    // If we reached nth variable
+    if (index == n) {
+        // Check if total sum equals C
+        if (sum == C) {
+            for (int i = 0; i < n; i++) {
+                cout << x[i] << " ";
+            }
+            cout << endl;
+        }
+        return;
+    }
+
+    // Try all possible values for current variable
+    for (int i = 0; i <= C; i++) {
+        if (sum + i <= C) {   // pruning condition
+            x[index] = i;
+            findSolutions(n, C, index + 1, sum + i);
+        }
+    }
+}
+
+int main() {
+    int n, C;
+
+    cout << "Enter number of variables (n): ";
+    cin >> n;
+
+    cout << "Enter constant value (C <= 10): ";
+    cin >> C;
+
+    cout << "\nSolutions:\n";
+
+    findSolutions(n, C, 0, 0);
+
+    return 0;
+}
